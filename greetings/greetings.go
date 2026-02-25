@@ -6,7 +6,7 @@ import (
 	"math/rand"
 )
 
-// Heloo returns a greeting for the named person
+// Hello returns a greeting for the named person
 func Hello(name string) (string, error) {
 	// If no name was given, return an error with a message
 	if name == "" {
@@ -17,6 +17,24 @@ func Hello(name string) (string, error) {
 	message := fmt.Sprintf(randomFormat(), name)
 
 	return message, nil
+}
+
+// Hellos returns a map that associates a greeting with each named person
+func Hellos(names []string) (map[string]string, error) {
+	messages := make(map[string]string)
+
+	// Loop through each of the given names, getting a greeting for it,
+	// then adding it to the map of greetings
+	for _, name := range names {
+		message, err := Hello(name)
+		if err != nil {
+			return nil, err
+		}
+
+		messages[name] = message
+	}
+
+	return messages, nil
 }
 
 // randomFormat returns one of a set of greeting messages. The returned
